@@ -59,11 +59,10 @@ projeto-autou/
 │   ├── routes/
 │   │   └── analyze.py
 │   ├── services/
-│   │   └── ai/
-│   │       ├── ai_interface.py
-│   │       ├── openai_service.py
-│   │       ├── mock_ai_service.py
-│   │       └── factory.py
+│   │   ├── ai_interface.py
+│   │   ├── openai_service.py
+│   │   ├── mock_ai_service.py
+│   │   └── factory.py
 │   ├── tests/
 │   │   ├── test_analyze_endpoint.py
 │   │   └── test_mock_ai_service.py
@@ -84,7 +83,7 @@ projeto-autou/
 
 ### Backend
 
-- **Python 3.11+**  
+- **Python 3.14.2**  
   Linguagem principal do projeto.
 
 - **FastAPI**  
@@ -136,21 +135,43 @@ projeto-autou/
 
 ### Pré-requisitos
 
-- Python 3.11 ou superior
+- Python 3.14
 - Navegador web moderno
 - Docker e Docker Compose (opcional)
 
 ---
 
-### Método 1: Execução Rápida (Recomendado)
+### Método 1: Execução Rápida Usando Docker (Recomendado)
 
 #### Passo 1: Clonar o repositório
 
 Execute os comandos abaixo no terminal:
 
 ```
-git clone https://github.com/seu-usuario/email-analyzer-ai.git
-cd email-analyzer-ai
+git clone https://github.com/MarcusCastilhos/AutoU-Desafio.git
+cd autou-desafio
+```
+
+#### Passo 2: Rodar o comando docker
+
+```
+docker-compose up --build
+```
+
+#### Passo 3: Acessar
+
+- Documentação Swagger: http://localhost:8000/docs
+- Pagina Web: http://localhost:3000
+
+### Método 2: Rodar Local
+
+#### Passo 1: Clonar o repositório
+
+Execute os comandos abaixo no terminal:
+
+```
+git clone https://github.com/MarcusCastilhos/AutoU-Desafio.git
+cd autou-desafio
 ```
 
 #### Passo 2: Iniciar o Backend
@@ -202,7 +223,7 @@ cd ..
 Acesse a pasta do frontend:
 
 ```
-cd frontend
+cd frontend/public
 ```
 
 Sirva os arquivos estáticos:
@@ -213,27 +234,8 @@ python -m http.server 8080
 
 #### Passo 4: Acessar a aplicação
 
-- Backend (API): http://localhost:8000
 - Documentação Swagger: http://localhost:8000/docs
 - Frontend: http://localhost:8080
-
----
-
-### Método 2: Usando Docker
-
-Na pasta backend, execute:
-
-```
-cd backend
-docker-compose up --build
-```
-
-O frontend pode ser servido com qualquer servidor HTTP simples.  
-Exemplo:
-
-```
-python -m http.server 8080
-```
 
 ---
 
