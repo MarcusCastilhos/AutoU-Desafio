@@ -4,8 +4,49 @@
     <meta charset="UTF-8" />
     <title>Email Analyzer AI</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <div class="app">
+      <h1>Email Analyzer AI</h1>
+
+      <div class="analyze-box">
+        <p>
+          Insira o conteúdo do email ou faça upload de um arquivo .txt ou pdf
+          para análise.
+        </p>
+
+        <textarea
+          id="emailText"
+          placeholder="Digite o conteúdo do email para análise..."
+        ></textarea>
+
+        <div class="upload">
+          <label for="fileInput">Carregar arquivo</label>
+          <input
+            type="file"
+            id="fileInput"
+            name="fileInput"
+            accept=".txt,.pdf"
+          />
+          <span id="fileName">Nenhum arquivo selecionado</span>
+        </div>
+
+        <button id="analyzeBtn">Analisar</button>
+      </div>
+
+      <div id="response" class="response"></div>
+
+      <div id="history" class="history"></div>
+    </div>
+
     <script src="script.js" defer></script>
   </body>
 </html>
