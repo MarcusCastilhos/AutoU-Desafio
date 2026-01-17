@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./backend
+    container_name: email-analyzer-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - USE_MOCK_AI=true
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: email-analyzer-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
