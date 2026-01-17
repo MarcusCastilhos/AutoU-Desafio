@@ -5,7 +5,9 @@
 ![Email Analyzer AI](https://img.shields.io/badge/Email%20Analyzer-AI-blue)
 ![Python](https://img.shields.io/badge/Python-3.11+-yellow)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 **Sistema inteligente de análise e classificação automática de emails**
 
@@ -16,7 +18,6 @@
 ## 📋 Índice
 
 - [Visão Geral](#-visão-geral)
-- [Funcionalidades](#-funcionalidades)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
 - [Tecnologias](#️-tecnologias-utilizadas)
 - [Instalação e Execução](#-instalação-e-execução)
@@ -44,28 +45,6 @@ O sistema identifica se um email é:
 - **Improdutivo** → apenas informativo
 
 E gera **respostas automáticas contextualizadas**, utilizando IA ou um serviço mock.
-
----
-
-## ✨ Funcionalidades
-
-### 🔧 Backend (API)
-
-- ✅ Classificação automática de emails
-- ✅ Geração de respostas inteligentes
-- ✅ Suporte a múltiplos provedores de IA (OpenAI + Mock)
-- ✅ API RESTful com documentação Swagger
-- ✅ Testes automatizados
-- ✅ Configuração via variáveis de ambiente
-
-### 💻 Frontend (Interface Web)
-
-- ✅ Interface moderna (tema escuro)
-- ✅ Upload de arquivos TXT e PDF
-- ✅ Extração de texto de PDFs no navegador
-- ✅ Histórico de análises expansível
-- ✅ Design responsivo (mobile e desktop)
-- ✅ Feedback visual em tempo real
 
 ---
 
