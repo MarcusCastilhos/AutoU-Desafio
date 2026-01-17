@@ -302,23 +302,8 @@ curl -X POST http://localhost:8000/analyze
 
 ```
 cd backend
-pytest -v
+python -m pytest tests/ -v
 ```
-
-### Cobertura de Testes
-
-```
-pytest --cov=.
-```
-
-### Testes Disponíveis
-
-- Teste do endpoint /analyze
-- Teste de classificação de emails
-- Teste do MockAIService
-- Teste de respostas automáticas
-
----
 
 ## 🔧 Configuração
 
