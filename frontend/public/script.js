@@ -1,3 +1,8 @@
+const API_BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8000"
+    : "autou-desafio-production.up.railway.app";
+
 const analyzeBtn = document.getElementById("analyzeBtn");
 const fileInput = document.getElementById("fileInput");
 const fileName = document.getElementById("fileName");
@@ -10,7 +15,6 @@ let openIndex = null;
 let uploadedFileContent = "";
 let isProcessingPDF = false;
 
-/* ---------- Upload de Arquivo ---------- */
 fileInput.addEventListener("change", async () => {
   if (!fileInput.files.length) {
     fileName.textContent = "Nenhum arquivo selecionado";
@@ -23,18 +27,15 @@ fileInput.addEventListener("change", async () => {
   const file = fileInput.files[0];
   fileName.textContent = file.name;
 
-  // Limpa e bloqueia textarea
   emailText.value = "";
   emailText.disabled = true;
 
-  // Verifica o tipo de arquivo
   const isTXT =
     file.type === "text/plain" || file.name.toLowerCase().endsWith(".txt");
   const isPDF =
     file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
 
   if (isTXT) {
-    // Lê arquivo TXT
     fileName.className = "ready";
     const reader = new FileReader();
     reader.onload = () => {
@@ -42,7 +43,6 @@ fileInput.addEventListener("change", async () => {
     };
     reader.readAsText(file);
   } else if (isPDF) {
-    // Processa arquivo PDF
     fileName.className = "processing";
     fileName.textContent = `${file.name} (extraindo texto...)`;
     isProcessingPDF = true;
@@ -65,9 +65,7 @@ fileInput.addEventListener("change", async () => {
   }
 });
 
-/* ---------- Botão Analisar ---------- */
 analyzeBtn.addEventListener("click", async () => {
-  // Verifica se ainda está processando PDF
   if (isProcessingPDF) {
     showResponse(
       "⏳ Aguarde, ainda extraindo texto do PDF...",
@@ -84,15 +82,12 @@ analyzeBtn.addEventListener("click", async () => {
     let methodLabel = "";
     let contentForHistory = "";
 
-    /* Verifica a fonte do conteúdo */
     if (!emailText.disabled && emailText.value.trim()) {
-      // Texto manual
       const blob = new Blob([emailText.value], { type: "text/plain" });
       formData.append("file", blob, "email_digitado.txt");
       methodLabel = "Texto inserido manualmente";
       contentForHistory = emailText.value;
     } else if (fileInput.files.length) {
-      // Upload de arquivo
       const file = fileInput.files[0];
       formData.append("file", file);
 
@@ -100,7 +95,6 @@ analyzeBtn.addEventListener("click", async () => {
       const ext = isPDF ? "PDF" : "TXT";
       methodLabel = `Upload via ${ext}`;
 
-      // Obtém conteúdo para histórico
       if (
         uploadedFileContent &&
         !uploadedFileContent.includes("[Conteúdo extraído") &&
@@ -109,7 +103,6 @@ analyzeBtn.addEventListener("click", async () => {
       ) {
         contentForHistory = uploadedFileContent;
       } else if (isPDF) {
-        // Se for PDF e não tiver conteúdo, tenta extrair novamente
         contentForHistory = await extractPDFText(file);
       } else {
         contentForHistory = await readTextFile(file);
@@ -123,8 +116,7 @@ analyzeBtn.addEventListener("click", async () => {
       return;
     }
 
-    // Envia para o backend
-    const res = await fetch("http://localhost:8000/analyze", {
+    const res = await fetch(`${API_BASE_URL}/analyze`, {
       method: "POST",
       body: formData,
     });
@@ -133,7 +125,6 @@ analyzeBtn.addEventListener("click", async () => {
 
     const data = await res.json();
 
-    // Exibe resposta
     showResponse(
       `
       <div><strong>Categoria:</strong> <span class="category">${data.category}</span></div>
@@ -143,7 +134,6 @@ analyzeBtn.addEventListener("click", async () => {
       "status-success",
     );
 
-    // Adiciona ao histórico
     addHistory(methodLabel, data, contentForHistory);
   } catch (err) {
     console.error("Erro na análise:", err);
@@ -153,9 +143,6 @@ analyzeBtn.addEventListener("click", async () => {
   }
 });
 
-/* ---------- Funções Auxiliares ---------- */
-
-// Extrai texto de PDF usando pdf.js
 async function extractPDFText(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -163,14 +150,12 @@ async function extractPDFText(file) {
       try {
         const typedArray = new Uint8Array(e.target.result);
 
-        // Carrega o PDF
         const loadingTask = pdfjsLib.getDocument(typedArray);
         const pdf = await loadingTask.promise;
 
         let fullText = "";
         const maxPages = Math.min(pdf.numPages, 10); // Limita a 10 páginas
 
-        // Extrai texto de cada página
         for (let i = 1; i <= maxPages; i++) {
           try {
             const page = await pdf.getPage(i);
@@ -200,7 +185,6 @@ async function extractPDFText(file) {
   });
 }
 
-// Lê arquivo de texto
 function readTextFile(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -210,19 +194,14 @@ function readTextFile(file) {
   });
 }
 
-// Exibe resposta na interface
 function showResponse(content, className = "") {
   responseDiv.innerHTML = content;
   responseDiv.className = `response ${className}`;
 }
 
-/* ---------- Gerenciamento do Histórico ---------- */
-
 function addHistory(method, data, content) {
-  // Prepara conteúdo para exibição
   const displayContent = formatContentForDisplay(content);
 
-  // Adiciona ao histórico
   history.unshift({
     method,
     category: data.category,
@@ -232,17 +211,14 @@ function addHistory(method, data, content) {
     timestamp: new Date().toLocaleTimeString("pt-BR"),
   });
 
-  // Limpa o formulário
   resetForm();
 
-  // Renderiza histórico
   renderHistory();
 }
 
 function formatContentForDisplay(content) {
   if (!content) return "[Nenhum conteúdo]";
 
-  // Limita o tamanho para exibição
   const maxLength = 1500;
   let displayContent = content;
 
@@ -276,7 +252,6 @@ function renderHistory() {
     const card = document.createElement("div");
     card.className = "history-card";
 
-    // Formata o conteúdo para HTML
     const formattedContent = escapeHtml(item.content).replace(/\n/g, "<br>");
     const formattedResponse = escapeHtml(item.response).replace(/\n/g, "<br>");
 
@@ -300,7 +275,6 @@ function renderHistory() {
       </div>
     `;
 
-    // Adiciona evento de clique no cabeçalho
     const header = card.querySelector(".card-header");
     header.addEventListener("click", (e) => {
       if (!e.target.closest(".category-badge")) {
@@ -313,12 +287,10 @@ function renderHistory() {
   });
 }
 
-// Função para escapar HTML
 function escapeHtml(text) {
   const div = document.createElement("div");
   div.textContent = text;
   return div.innerHTML;
 }
 
-// Inicialização: renderiza histórico vazio
 renderHistory();
