@@ -316,6 +316,12 @@ cd backend
 python -m pytest tests/ -v
 ```
 
+### Para Testes Com Docker
+
+```
+docker compose exec backend pytest
+```
+
 ## 🔧 Configuração
 
 ### Modos de IA
