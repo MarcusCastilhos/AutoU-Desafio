@@ -1,7 +1,5 @@
 const API_BASE_URL =
-  window.location.hostname === "localhost"
-    ? "http://localhost:8000"
-    : "https://autou-desafio-production.up.railway.app";
+  window.location.hostname === "localhost" ? "http://localhost:8000" : "/api";
 
 const analyzeBtn = document.getElementById("analyzeBtn");
 const fileInput = document.getElementById("fileInput");
