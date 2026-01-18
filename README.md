@@ -49,34 +49,45 @@ E gera **respostas automáticas contextualizadas**, utilizando IA ou um serviço
 ## 📁 Estrutura do Projeto
 
 ```text
-projeto-autou/
-├── backend/
-│   ├── core/
-│   │   └── config.py
-│   │   └── exceptions.py
-│   ├── models/
-│   │   └── email_schema.py
-│   ├── routes/
-│   │   └── analyze.py
-│   ├── services/
-│   │   ├── ai_interface.py
-│   │   ├── openai_service.py
-│   │   ├── mock_ai_service.py
-│   │   └── factory.py
-│   ├── tests/
-│   │   ├── test_analyze_endpoint.py
-│   │   └── test_mock_ai_service.py
-│   ├── main.py
-│   ├── Dockerfile
-│   ├── docker-compose.yml
-│   ├── requirements.txt
-│   ├── .env.example
-│   └── README.md
-│
-└── frontend/
-    ├── index.html
-    ├── styles.css
-    └── script.js
+autou-desafio/
+│   ├── backend/
+│   │   ├── controller/
+│   │   │   └── analize_controller.py
+│   │   ├── core/
+│   │   │   └── config.py
+│   │   │   └── exceptions.py
+│   │   ├── models/
+│   │   │   └── email_schema.py
+│   │   ├── prompts/
+│   │   │   └── email_analysis_prompt.py
+│   │   ├── services/
+│   │   │   ├── ai_executor_service
+│   │   │   ├── ai_interface.py
+│   │   │   ├── openai_executor.py
+│   │   │   ├── mock_executor.py
+│   │   │   ├── mock_ai_service.py
+│   │   │   └── factory.py
+│   │   ├── tests/
+│   │   │   ├── test_analyze_email_usecase.py
+│   │   │   ├── test_analyze_endpoint.py
+│   │   │   └── test_mock_executor.py
+│   │   ├── usecases/
+│   │   │   └── analyze_email_usecase.py
+│   │   ├── utils/
+│   │   │   └── file_reader.py
+│   │   ├── main.py
+│   │   ├── Dockerfile
+│   │   ├── requirements.txt
+│   │   └── .env.example
+│   └── frontend/
+│       │   ├── public/
+│       │   ├── index.html
+│       │   ├── styles.css
+│       │   └── script.js
+│       ├── Dockerfile
+|       └── nginx.conf
+├── docker-compose.yml
+├── README.md
 ```
 
 ## ⚙️ Tecnologias Utilizadas
@@ -346,28 +357,6 @@ BACKEND_URL=http://localhost:8000
 
 ---
 
-## ❓ FAQ
-
-**O sistema funciona sem internet?**  
-Sim. Por padrão utiliza o MockAIService.
-
-**Posso analisar PDFs protegidos por senha?**  
-Não. Apenas PDFs não protegidos.
-
-**Quantas páginas de PDF são suportadas?**  
-Até 10 páginas por documento.
-
-**Como limpar o histórico?**  
-Atualize a página no navegador.
-
-**Posso usar minha própria chave da OpenAI?**  
-Sim, configurando no arquivo .env.
-
-**O projeto possui suporte a Docker?**  
-Sim, via docker-compose.
-
----
-
 ## 🐛 Solução de Problemas
 
 ### Falha ao conectar ao backend
@@ -390,46 +379,6 @@ Sim, via docker-compose.
 
 ---
 
-## 📈 Melhorias Futuras
-
-- Autenticação de usuários
-- Persistência de dados (SQLite ou PostgreSQL)
-- Exportação de relatórios
-- Análise em lote
-- Dashboard com métricas
-- Suporte a múltiplos idiomas
-- Integração com Gmail e Outlook
-
----
-
-## 🤝 Contribuindo
-
-- Faça um fork do projeto
-- Crie uma branch para sua feature
-- Commit suas alterações
-- Envie para o repositório
-- Abra um Pull Request
-
----
-
-## 📄 Licença
-
-xxx
-
----
-
-## 👨‍💻 Autor
-
-Marcus Castilhos – Desenvolvedor Full Stack
-
-GitHub: @seu-usuario  
-LinkedIn: Seu Perfil  
-Email: seu.email@exemplo.com
-
----
-
 ## 🙏 Agradecimentos
 
 - Equipe AutoU pelo desafio técnico
-- Comunidade open source
-- Todos os contribuidores e testadores
