@@ -23,14 +23,7 @@
 - [API Reference](#-api-reference)
 - [Testes](#-testes)
 - [Configuração](#-configuração)
-- [FAQ](#-faq)
 - [Solução de Problemas](#-solução-de-problemas)
-- [Screenshots](#-screenshots)
-- [Melhorias Futuras](#-melhorias-futuras)
-- [Contribuindo](#-contribuindo)
-- [Licença](#-licença)
-- [Autor](#-autor)
-
 ---
 
 ## 🎯 Visão Geral
