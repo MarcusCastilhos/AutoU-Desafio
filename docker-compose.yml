@@ -3,7 +3,7 @@ services:
     build: ./backend
     container_name: email-analyzer-backend
     ports:
-      - "8000:8000"
+      - "8000:8080"
     volumes:
       - ./backend:/app
     environment:
