@@ -1,12 +1,10 @@
 import os
-from services.ai_interface import AIServiceInterface
-from services.openai_service import OpenAIService
-from services.mock_ai_service import MockAIService
+from services.ai_executor_service import AIExecutorService
+from services.openai_executor import OpenAIExecutor
+from services.mock_executor import MockExecutor
 
-def get_ai_service() -> AIServiceInterface:
+def get_ai_executor() -> AIExecutorService:
     use_mock = os.getenv("USE_MOCK_AI", "true").lower() == "true"
 
-    if use_mock:
-        return MockAIService()
-
-    return OpenAIService()
+    provider = MockExecutor() if use_mock else OpenAIExecutor()
+    return AIExecutorService(provider)
