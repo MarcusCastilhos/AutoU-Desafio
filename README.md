@@ -220,7 +220,7 @@ pip install -r requirements.txt
 Inicie o servidor:
 
 ```
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+uvicorn main:app --reload --host 0.0.0.0 --port 8080
 ```
 
 #### Passo 3: Iniciar o Frontend
@@ -240,13 +240,13 @@ cd frontend/public
 Sirva os arquivos estáticos:
 
 ```
-python -m http.server 8080
+python -m http.server
 ```
 
 #### Passo 4: Acessar a aplicação
 
 - Documentação Swagger: http://localhost:8000/docs
-- Frontend: http://localhost:8080
+- Frontend: http://localhost:8000
 
 ---
 
@@ -254,7 +254,7 @@ python -m http.server 8080
 
 ### 1. Análise de Texto Direto
 
-- Acesse http://localhost:8080
+- Acesse http://localhost:8000
 - Cole o conteúdo do email na caixa de texto
 - Clique em **Analisar**
 - Veja a categoria e a resposta gerada
